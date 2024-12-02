@@ -59,7 +59,7 @@ function ProductTable({ products, filterText, inStockOnly }) {
     if (inStockOnly && !product.stocked) {
       return;
     }
-    if (product !== lastCategory) {
+    if (product.category !== lastCategory) {
       rows.push(
         <ProductCategoryRow
           category={product.category}
@@ -84,12 +84,12 @@ function ProductTable({ products, filterText, inStockOnly }) {
   );
 }
 
-function SearchBar({ filterText, inStockOnly, setFilterText, setInStockOnly }) {
+function SearchBar({ filterText, inStockOnly, onFilterTextChange, onInStockOnlyChange }) {
   return (
     <form>
       <input type="text" value={filterText} placeholder="Search..." onChange={(e) => onFilterTextChange(e.target.value)} />
       <label>
-        <input type="checkbox" onChange={(e) => onInStockOnlyChange(e.target.value)} /> Only show products in stock
+        <input type="checkbox" onChange={(e) => onInStockOnlyChange(e.target.checked)} /> Only show products in stock
       </label>
     </form>
   );
